@@ -1,0 +1,124 @@
+\documentclass[11pt,aspectratio=169,xcolor=dvipsnames]{beamer}
+
+% PACKAGES
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{bbm}
+\usepackage[style=ieee]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+\hypersetup{pdfborderstyle={/S/U/W 1}}
+
+% THEME for uWaterloo slides %
+
+% Credit to Junan Lin <junan_lin@hotmail.com> for the theme
+\mode<presentation>{\setbeamercovered{invisible}
+\usetheme{Madrid}
+}
+\usefonttheme{professionalfonts}
+
+% Customize for Waterloo theme (gold and black)
+\definecolor{UWgold}{RGB}{254,209,66} % Waterloo gold
+\definecolor{darkgrey}{RGB}{169,169,169} 
+
+\setbeamercolor{palette primary}{bg=black,fg=UWgold}
+\setbeamercolor{palette secondary}{bg=white,fg=black}
+\setbeamercolor{palette tertiary}{bg=UWgold,fg=white}
+\setbeamercolor{palette quaternary}{bg=Black,fg=white}
+\setbeamercolor{structure}{fg=darkgrey} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=black} % TOC sections
+\setbeamercolor{subsection in head/foot}{bg=UWgold,fg=white}
+
+% Modify the default footer for better ratio
+\makeatletter
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshortauthor, \insertshortinstitute
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.5ex,dp=1.125ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.5ex,dp=1.125ex,rightskip=.3cm plus1fil]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\hfill\insertshortdate\hfill\insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+\makeatother
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamerfont{footnote}{size=\tiny}
+
+\title{Aerial Ad-hoc Network Formation using Differential Games}
+\subtitle{Game-Theoretic Control Methods for UAV Swarms}
+
+\author{Matteo Golin}
+\date{April 2, 2026}
+
+\institute[UWaterloo]
+{University of Waterloo, Waterloo, ON, Canada\\
+\medskip
+\texttt{mgolin@uwaterloo.ca}
+}
+
+\logo{\includegraphics[width=.25\paperwidth]{UniversityOfWaterloo_logo_horiz_rgb}}
+
+\include{shorthands}
+
+% DOCUMENT BEGINS
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+% MOTIVATION
+\section{Motivation}
+\include{sections/motivation}
+
+% LITERATURE REVIEW
+\section{Existing Solutions}
+\include{sections/literature}
+
+% SETUP
+\section{Problem Setup}
+\include{sections/setup}
+
+% CONTRIBUTION
+\section{Contribution}
+\include{sections/contribution}
+
+% RESULTS
+\section{Results}
+\include{sections/results}
+
+\section{Conclusion}
+
+\begin{frame}{Conclusion}
+    TODO
+\end{frame}
+
+\begin{frame}
+    \centering
+    \LARGE Thank you!
+\end{frame}
+
+\section*{References}
+
+\begin{frame}[allowframebreaks]{References}
+    \printbibliography
+\end{frame}
+
+\include{sections/appendix}
+
+\end{document}
