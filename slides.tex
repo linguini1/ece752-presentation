@@ -7,8 +7,10 @@
 \usepackage{hyperref}
 \usepackage{bbm}
 \usepackage[style=ieee]{biblatex}
+\usepackage{subcaption}
 
 \addbibresource{bibliography.bib}
+\addbibresource{images.bib}
 
 \hypersetup{pdfborderstyle={/S/U/W 1}}
 
@@ -38,7 +40,7 @@
   \leavevmode%
   \hbox{%
     \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm]{author in head/foot}%
-      \usebeamerfont{author in head/foot}\insertshortauthor, \insertshortinstitute
+        \usebeamerfont{author in head/foot}\color{black}\insertshortauthor, \insertshortinstitute
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.5ex,dp=1.125ex,center]{title in head/foot}%
       \usebeamerfont{title in head/foot}\insertshorttitle
@@ -53,6 +55,9 @@
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamerfont{footnote}{size=\tiny}
+
+% Reduce caption font size
+\setbeamerfont{caption}{size=\tiny}
 
 \title{Aerial Ad-hoc Network Formation using Differential Games}
 \subtitle{Game-Theoretic Control Methods for UAV Swarms}
@@ -86,17 +91,13 @@
 \section{Motivation}
 \include{sections/motivation}
 
-% LITERATURE REVIEW
-\section{Existing Solutions}
-\include{sections/literature}
+% RELATED WORKS
+\section{Related Works}
+\include{sections/related-works}
 
-% SETUP
-\section{Problem Setup}
-\include{sections/setup}
-
-% CONTRIBUTION
-\section{Contribution}
-\include{sections/contribution}
+% METHODOLOGY
+\section{Methodology}
+\include{sections/methodology}
 
 % RESULTS
 \section{Results}
@@ -105,7 +106,23 @@
 \section{Conclusion}
 
 \begin{frame}{Conclusion}
-    TODO
+    \begin{columns}
+        \column{0.55\textwidth}
+        \begin{itemize}
+            \item Derived a closed-form, optimal solution to the aerial network connectivity
+                  differential game
+            \item Promising simulation results of network connectedness
+            \item Penalty for pursuer proximity to fix grouping?
+            \item Use more complex agent dynamics (quadrotor model)
+            \item Bounded play region: ratio of $n$ to $m$ to ensure connectedness?
+        \end{itemize}
+
+        \column{0.45\textwidth}
+        \begin{figure}
+            \includegraphics[width=\textwidth]{assets/cool-network.png}
+            \caption{Network formation of $n = 10$, $m = 10$ scenario}
+        \end{figure}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
