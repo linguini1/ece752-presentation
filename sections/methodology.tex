@@ -4,33 +4,96 @@
     Methodology
 \end{frame}
 
-\begin{frame}{Methodology}
-    HAHAHAHAHHA TODO because how on earth am I going to explain HJI derivation
-    of optimal controls using the Lagrangian in conceivably 5 minutes?
-    $n$ pursuers, $m$ evaders, something something something
+\begin{frame}{Game structure}
+    \begin{itemize}
+        \item $n$ pursuers (UAVs)
+        \item $m$ evaders (ground agents)
+        \item Played in infinite 3D volume, ground agents on 2D plane at $z = 0$
+        \item Perfect information
+        \item Simple agent dynamics
+        \item \textbf{Only pursuers act as routers}
+        \item Agents are \textbf{connected} if they are within a connection radius of one
+              another
+    \end{itemize}
 \end{frame}
 
-% In this paper, we consider a search-and-rescue mission
-% in which $m$ ground agents are deployed to cover a large search area. We
-% consider ground agents as independent and that they do not necessarily
-% coordinate their movement with one another (mimicking a "divide-and-conquer"
-% approach). During this mission, $n$ UAVs equipped with radio transmitters are
-% tasked with forming an ad-hoc aerial network to maintain connectivity between
-% all $m$ ground units. An optimal control input for the UAVs is desired to
-% maximize connectivity and ensure that the ground units maintain the ability to
-% communicate throughout the mission.
+\begin{frame}{Game Cost (Utilities)}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{itemize}
+            \item $t \in [0, T]$: time horizon
+            \item $u, v$ pursuer, evader control signals
+            \item $x(t)$: state of the game at $t$
+            \item $\mathcal{L}$: running cost
+            \item $Q$: terminal cost
+            \item $V$: value function
+        \end{itemize}
+        \column{0.5\textwidth}
+        \begin{align*}
+            J(x, u, v, t) = \int_{t}^T \mathcal{L}(x, u, v, \tau) d\tau + Q(x(T))
+        \end{align*}
+        \begin{align*}
+            V(x, t) = \min_{u \in \mathcal{U}}\max_{v \in \mathcal{V}} J(x, u, v, t)
+        \end{align*}
+    \end{columns}
+\end{frame}
 
-%
-% We model this scenario as a two-player, zero-sum (2P0S), pursuit-evasion (PE)
-% differential game in which UAVs are modelled as pursuers and ground agents as
-% evaders. We follow the convention of modelling external system forces as an
-% optimal adversary by considering the evaders as a competing adversary to the
-% pursuers. We employ spectral graph theory to obtain a measure of network
-% connectivity to be optimized, and then employ the Hamilton-Jacobi-Isaacs (HJI)
-% partial differential equation (PDE) to determine a closed-form optimal control
-% law for $n$ pursuers and $m$ evaders to maximize/minimize network connectivity
-% respectively. We then construct a simulator to execute different PE scenarios,
-% as well as a rendering engine for visually observing the behaviour of agents
-% during each simulation run. We then visually and numerically evaluate the
-% behaviour of the pursuers under their optimal control law when evaders follow a
-% random walk.
+\begin{frame}{Hamilton-Jacobi-Isaacs Equation}
+    \begin{columns}
+        \column{0.3\textwidth}
+        \begin{itemize}
+            \item HJI equation
+            \item Solving this gives the value function
+            \item Optimal controls can be derived from the value function
+            \item Boundary condition: $Q$
+        \end{itemize}
+        \column{0.7\textwidth}
+        \begin{align*}
+            -\frac{\partial V}{\partial t} = \min_{u \in \mathcal{U}} \max_{v \in
+                \mathcal{V}} \left\{\left(\frac{\partial V}{\partial x}\right)^\top \cdot
+            f(x, u, v) + \mathcal{L}(x)\right\}
+        \end{align*}
+        \begin{align*}
+            V(x, t) & = \min_{u \in \mathcal{U}}\max_{v \in \mathcal{V}} J(x, u, v, t) \\
+            V(x, T) & = Q(x(T))
+        \end{align*}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Connectivity Measure}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{itemize}
+            \item We need a direct measure of "connectivity" to optimize
+            \item Graph Laplacian $L \in \mathbb{R}^{(n + m) \times (n + m)}$: matrix that
+                  describes a graph
+            \item $\lambda_2 = 0$: disconnected \cite[27]{graph-theory}
+            \item $\lambda_2 > 0$: measure of connectivity\cite[33]{graph-theory}
+        \end{itemize}
+        \column{0.5\textwidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.5\textwidth]{assets/laplacian.png}
+            \caption{A disconnected graph and its Laplacian matrix \cite{img:laplacian}}
+        \end{figure}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Final Costs}
+    \begin{columns}
+        \column{0.4\textwidth}
+        \begin{align*}
+            \mathcal{L}(x, u, v) = 1
+        \end{align*}
+        Penalize slow convergence time.
+        \column{0.4\textwidth}
+        \begin{align*}
+            Q(x(T)) = -\det(P^\top L(x(T)) P)
+        \end{align*}
+        Negated to respect that pursuers minimize cost
+    \end{columns}
+    \vspace{20pt}
+    \center
+    $P$ removes $\lambda_1$ \cite{pot-fields}, which is always 0 \cite[27]{graph-theory}.
+    This is our closed-form cost.
+\end{frame}

@@ -15,7 +15,7 @@
     \begin{columns}
         \column{0.4\textwidth}
         \begin{itemize}
-            \item Very little consideration of users as dynamic individuals
+            \item Very little consideration of independent users as dynamic
             \item Optimizing single-drone base-station trajectories \cite{drone-net-traj}
             \item Consideration of probabilistic high-traffic areas \cite{drone-cells}
             \item Link to static base station \cite{drone-cells}
@@ -66,7 +66,7 @@
         \begin{itemize}
             \item 2P0S games in continuous time and space
             \item Common modelling approach to controls problems \cite[1118]{gt-modelling}
-            \item Use the Hamilton-Jacobi-Isaacs equation to find saddle-point equilibrium
+            \item Use the Hamilton-Jacobi-Isaacs equation to find saddle-point equilibrium (NE)
         \end{itemize}
 
         \column{0.6\textwidth}
@@ -84,10 +84,9 @@
         \begin{itemize}
             \item Existing work is highly focused on capture \cite{mpme-sol, pe-intro,
                       pe-diff-speeds, stochastic-pe, discrete-pe, pe-env-constr}
-            \item 2D capture PE games are analytically solved, but require prior
-                  analysis of the game \cite{mpme-sol}
+            \item 2D capture games are analytically solved, but P-E pairings are
+                  assigned in advance \cite{mpme-sol}
             \item Some consideration of 3D PE, but not multi-agent \cite{pe-diff-speeds}
-            \item Very little consideration of multi-agent cooperation
         \end{itemize}
 
         \column{0.6\textwidth}
@@ -122,10 +121,10 @@
     \begin{columns}
         \column{0.4\textwidth}
         \begin{itemize}
-            \item Differential-game model of aerial network formation which admits a closed-form,
-                  optimal control law for aerial agents
-            \item Consideration of a multi-pursuer, multi-evader scenario instead of 1v1
-            \item Differential game model with cooperation among pursuers
+            \item Differential-game model of aerial network formation
+            \item Admits a closed-form, saddle-point optimal control law for agents
+            \item Multi-pursuer, multi-evader scenario in 3D instead of 1v1
+            \item Differential game model with \textbf{cooperation} among pursuers
         \end{itemize}
 
         \column{0.6\textwidth}
